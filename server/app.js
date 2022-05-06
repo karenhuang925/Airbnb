@@ -5,9 +5,11 @@ const app = express();
 
 app.use(express.json());
 
-app.use('/entrees', require('./routes/entrees'));
-app.use('/entreeTypes', require('./routes/entreeTypes'));
-app.use('/ingredients', require('./routes/ingredients'));
+app.use('/users', require('./routes/users'));
+app.use('/spots', require('./routes/spots'));
+app.use('/bookings', require('./routes/bookings'));
+app.use('/reviews', require('./server/routes/reivews'));
+app.use('/images', require('./routes/images'));
 
 if (require.main === module) {
   const port = 8005;
