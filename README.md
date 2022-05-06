@@ -216,7 +216,7 @@ Returns all the spots.
 * Require Authentication: false
 * Request
   * Method: get
-  * URL: /spots/
+  * URL: /spots
   * Body: none
 
 * Successful Response
