@@ -2,10 +2,10 @@
 
 ## Database Schema Design
 
-url to db diagram: https://dbdiagram.io/d/625634dd2514c979031dd911![Airbnb V May10](https://user-images.githubusercontent.com/92420431/167755909-74c13952-9fe0-4936-a365-6bcddf8034ba.png)
+url to db diagram: https://dbdiagram.io/d/625634dd2514c979031dd911
 
 
-![Uploading Airbnb V.May10.png…]()
+![Airbnb V May10](https://user-images.githubusercontent.com/92420431/167755909-74c13952-9fe0-4936-a365-6bcddf8034ba.png)
 
 
 
