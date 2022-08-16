@@ -19,8 +19,6 @@ module.exports = (sequelize, DataTypes) => {
       const user = await User.scope('loginUser').findOne({
         where: {
           [Op.or]: {
-            firstName: credential,
-            lastName: credential,
             email: credential
           }
         }
