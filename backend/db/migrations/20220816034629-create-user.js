@@ -19,7 +19,8 @@ module.exports = {
         unique:false
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique:true
       },
       hashedPassword: {
         type: Sequelize.STRING.BINARY
