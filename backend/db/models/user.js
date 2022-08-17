@@ -14,12 +14,17 @@ module.exports = (sequelize, DataTypes) => {
     static getCurrentUserById(id) {
       return User.scope("currentUser").findByPk(id);
     }
-    static async login({ credential, password }) {
+
+    static getOneBy(email){
+      return User.scope("currentUser").findOne({where:{email:email}})
+    }
+
+    static async login({ email, password }) {
       const { Op } = require('sequelize');
       const user = await User.scope('loginUser').findOne({
         where: {
           [Op.or]: {
-            email: credential
+            email: email
           }
         }
       });
@@ -29,6 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     }
     static async signup({ firstName, lastName, email, password }) {
       const hashedPassword = bcrypt.hashSync(password);
+
       const user = await User.create({
         firstName,
         lastName,
@@ -70,8 +76,9 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique:true,
       validate: {
-        len: [3, 256]
+        len: [3, 256],
       }
     },
     hashedPassword: {
@@ -91,7 +98,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     scopes: {
       currentUser: {
-        attributes: { exclude: ["hashedPassword"] }
+        attributes: { exclude: ["createdAt", "updatedAt", "hashedPassword"] }
       },
       loginUser: {
         attributes: {}
