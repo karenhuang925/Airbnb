@@ -45,7 +45,7 @@ router.post(
   async (req, res, next) => {
     const { email, password } = req.body;
 
-    // let token = await setTokenCookie(res, user);
+
 
     const user = await User.login({ email, password });
 
@@ -57,8 +57,12 @@ router.post(
       return next(err);
     }
 
+    let token = await setTokenCookie(res, user);
     return res.json({
-      user
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      token:token
     })
   }
 );
@@ -109,8 +113,11 @@ router.post(
       // })
 
       return res.json({
-        user
-      });
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        token:token
+      })
     }
 );
 
