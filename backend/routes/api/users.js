@@ -45,6 +45,8 @@ router.post(
   async (req, res, next) => {
     const { email, password } = req.body;
 
+
+
     const user = await User.login({ email, password });
 
     if (!user) {
@@ -56,10 +58,12 @@ router.post(
     }
 
     let token = await setTokenCookie(res, user);
-
     return res.json({
-      user, token
-    });
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      token:token
+    })
   }
 );
 
@@ -103,13 +107,29 @@ router.post(
       }
 
       const user = await User.signup({ firstName, lastName, email, password });
-
-      let token = await setTokenCookie(res, user);
+      // let token = await setTokenCookie(res, user);
+      // user.update({
+      //   token: token
+      // })
 
       return res.json({
-        user, token
-      });
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        token:token
+      })
     }
+);
+
+//get current user's spots
+router.get(
+  '/my/spots',
+  restoreUser,
+  async (req, res, next) => {
+    const { user } = req
+    const spots = await user.getSpots();
+    return res.json({spots});
+  }
 );
 
 module.exports = router;

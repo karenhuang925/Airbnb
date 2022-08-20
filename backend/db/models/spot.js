@@ -12,8 +12,12 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Spot.belongsTo(
         models.User,
-        {foreignKey: 'ownerId'}
+        {foreignKey: 'ownerId', as: 'Owner'}
       ),
+      Spot.hasMany(
+        models.Review,
+        {foreignKey: 'spotId'}
+      )
       Spot.hasMany(
         models.Image,
         {
@@ -74,6 +78,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Spot',
+    defaultScope: {
+      attributes:  ["id", "ownerId", "address", "city","state","country","lat","lng","name","description","price","createdAt","updatedAt"]
+    },
   });
   return Spot;
 };
