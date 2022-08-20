@@ -4,7 +4,51 @@ const { User } = require('../../db/models');
 const { Spot } = require('../../db/models');
 const { Review } = require('../../db/models');
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
+const { check } = require('express-validator');
+const { handleValidationErrors } = require('../../utils/validation');
 
+
+
+const validateEditSpot = [
+    check('address')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Street address is required'),
+    check('city')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('City is required'),
+    check('state')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('State address is required'),
+    check('country')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Country address is required'),
+    check('lat')
+      .exists({ checkFalsy: true })
+      .isFloat({ min: -90, max: 90 })
+      .withMessage('Latitude is not valid'),
+    check('lng')
+      .exists({ checkFalsy: true })
+      .isFloat({ min: -180, max: 180 })
+      .withMessage('Latitude is not valid'),
+    check('name')
+      .exists({ checkFalsy: true })
+      .isLength({ max: 50 })
+      .notEmpty()
+      .withMessage('Name must be less than 50 characters'),
+    check('description')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Description address is required'),
+    check('price')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Price address is required'),
+    handleValidationErrors
+];
 
 const router = express.Router();
 
@@ -49,6 +93,8 @@ router.get(
     }
 );
 
+
+//create a spot
 router.post(
     '/',
     restoreUser,
@@ -73,5 +119,65 @@ router.post(
         });
     }
 );
+
+//edit a spot
+router.put(
+    '/:id',
+    requireAuth,
+    validateEditSpot,
+    async (req, res, next) => {
+        const theSpot = await Spot.findByPk(req.params.id)
+        if(!theSpot){
+            const err = new Error();
+            err.title = "Spot couldn't be found";
+            err.errors = ["Spot couldn't be found"];
+            err.status = 404;
+            return next(err);
+        }
+        const {user} = req
+
+        if (user.id !== theSpot.ownerId){
+            const err = new Error('Unauthorized');
+            err.title = 'Unauthorized';
+            err.errors = ['Unauthorized'];
+            err.status = 401;
+            return next(err);
+        }
+        const spotInfo = req.body
+        console.log(spotInfo)
+        theSpot.update(
+            spotInfo
+        )
+        return res.json({theSpot});
+    }
+)
+
+router.delete(
+    '/:id',
+    requireAuth,
+    async (req, res, next) => {
+        const theSpot = await Spot.findByPk(req.params.id)
+        if(!theSpot){
+            const err = new Error();
+            err.title = "Spot couldn't be found";
+            err.errors = ["Spot couldn't be found"];
+            err.status = 404;
+            return next(err);
+        }
+        const {user} = req
+
+        if (user.id !== theSpot.ownerId){
+            const err = new Error('Unauthorized');
+            err.title = 'Unauthorized';
+            err.errors = ['Unauthorized'];
+            err.status = 401;
+            return next(err);
+        }
+
+        await theSpot.destroy();
+
+        return res.json({message: "Successfully deleted"});
+    }
+)
 
 module.exports = router;
