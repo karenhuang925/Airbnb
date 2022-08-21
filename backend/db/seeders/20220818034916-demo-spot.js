@@ -4,7 +4,7 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('Spots', [
       {
-        ownerid: 1,
+        ownerId: 1,
         address: "123 Disney Lane",
         city: "San Francisco",
         state: "CA",
@@ -17,7 +17,7 @@ module.exports = {
         previewImage:"https://www.zillowstatic.com/s3/homepage/static/ZillowTimberlake_2098_DT_Full.jpg"
       },
       {
-        ownerid: 1,
+        ownerId: 1,
         address: "234 Disney Lane",
         city: "San Jose",
         state: "CA",
@@ -30,7 +30,7 @@ module.exports = {
         previewImage:"https://cdn.houseplansservices.com/content/9ns4vp133de3p7n98dhr862uvd/w384x256.jpg?v=2"
       },
       {
-        ownerid: 3,
+        ownerId: 3,
         address: "345 Disney Lane",
         city: "San Mateo",
         state: "CA",
