@@ -568,7 +568,7 @@ Returns all the reviews written by the current user.
           "id": 1,
           "userId": 1,
           "spotId": 1,
-          "review": "This was an awesome spot!",
+          "content": "This was an awesome spot!",
           "stars": 5,
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36" ,
@@ -620,7 +620,7 @@ Returns all the reviews that belong to a spot specified by id.
           "id": 1,
           "userId": 1,
           "spotId": 1,
-          "review": "This was an awesome spot!",
+          "content": "This was an awesome spot!",
           "stars": 5,
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36" ,
@@ -664,7 +664,7 @@ Create and return a new review for a spot specified by id.
 
     ```json
     {
-      "review": "This was an awesome spot!",
+      "content": "This was an awesome spot!",
       "stars": 5,
     }
     ```
@@ -680,7 +680,7 @@ Create and return a new review for a spot specified by id.
       "id": 1,
       "userId": 1,
       "spotId": 1,
-      "review": "This was an awesome spot!",
+      "content": "This was an awesome spot!",
       "stars": 5,
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-19 20:39:36" 
@@ -698,7 +698,7 @@ Create and return a new review for a spot specified by id.
       "message": "Validation error",
       "statusCode": 400,
       "errors": {
-        "review": "Review text is required",
+        "content": "Review text is required",
         "stars": "Stars must be an integer from 1 to 5",
       }
     }
@@ -745,7 +745,7 @@ Update and return an existing review.
 
     ```json
     {
-      "review": "This was an awesome spot!",
+      "content": "This was an awesome spot!",
       "stars": 5,
     }
     ```
@@ -761,7 +761,7 @@ Update and return an existing review.
       "id": 1,
       "userId": 1,
       "spotId": 1,
-      "review": "This was an awesome spot!",
+      "content": "This was an awesome spot!",
       "stars": 5,
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-20 10:06:40"
@@ -779,7 +779,7 @@ Update and return an existing review.
       "message": "Validation error",
       "statusCode": 400,
       "errors": {
-        "review": "Review text is required",
+        "content": "Review text is required",
         "stars": "Stars must be an integer from 1 to 5",
       }
     }
@@ -957,7 +957,13 @@ Create and return a new booking from a spot specified by id.
 * Request
   * Method: Post
   * URL: /api/spots/:spotid/bookings
-  * Body: none
+  * Body:     
+    ```json
+    {
+      "startDate": "2021-11-19",
+      "endDate": "2021-11-19"
+    }
+    ```
 
 * Successful Response
   * Status Code: 200
