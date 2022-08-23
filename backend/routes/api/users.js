@@ -2,6 +2,8 @@ const express = require('express')
 
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
+const { Spot } = require('../../db/models');
+const { Image } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
@@ -127,6 +129,47 @@ router.get(
     const { user } = req
     const spots = await user.getSpots();
     return res.json({spots});
+  }
+);
+
+//get all reviews of the current user
+router.get(
+  '/my/reviews',
+  restoreUser,
+  async (req, res, next) => {
+      const { user } = req
+      const reviews = await user.getReviews({
+        include: [{
+          model: User,
+          attributes: ["id", "firstName", "lastName"]
+        },{
+          model: Spot,
+          attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "price"]
+        },{
+          model: Image,
+          attributes: ["url"]
+
+        }]
+
+      });
+      return res.json({reviews});
+  }
+);
+
+//Get all of the Current User's Bookings
+router.get(
+  '/my/bookings',
+  restoreUser,
+  async (req, res, next) => {
+      const { user } = req
+      const bookings = await user.getBookings({
+        include: [{
+          model: Spot,
+          attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "price", "previewImage"]
+        }]
+
+      });
+      return res.json({bookings});
   }
 );
 
