@@ -156,4 +156,21 @@ router.get(
   }
 );
 
+//Get all of the Current User's Bookings
+router.get(
+  '/my/bookings',
+  restoreUser,
+  async (req, res, next) => {
+      const { user } = req
+      const bookings = await user.getBookings({
+        include: [{
+          model: Spot,
+          attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "price", "previewImage"]
+        }]
+
+      });
+      return res.json({bookings});
+  }
+);
+
 module.exports = router;

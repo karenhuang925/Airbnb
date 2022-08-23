@@ -51,14 +51,11 @@ router.put(
             return next(err);
         }
 
-
         const reviewInfo = req.body
         theReview.update(
             reviewInfo
         )
         return res.json({theReview});
-
-
     }
 )
 
