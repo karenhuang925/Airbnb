@@ -371,4 +371,37 @@ router.post(
     }
 );
 
+// add an image to spot
+router.post(
+    '/:spotid/images',
+    restoreUser,
+    async (req, res, next) => {
+        const {user} = req
+        const spotId = req.params.spotid
+        const theSpot = await Spot.findByPk(spotId)
+        if(!theSpot){
+            const err = new Error("Spot couldn't be found");
+            err.title = "Spot couldn't be found";
+            err.errors = ["Spot couldn't be found"];
+            err.status = 404;
+            return next(err);
+        }
+
+        if (user.id !== theSpot.ownerId){
+            const err = new Error('Unauthorized');
+            err.title = 'Unauthorized';
+            err.errors = ['Unauthorized'];
+            err.status = 401;
+            return next(err);
+        }
+
+        const imageInfo = req.body
+        const image = await theSpot.createImage({url: imageInfo.url})
+        await theSpot.addImage(image)
+        return res.json({
+            image
+        });
+    }
+);
+
 module.exports = router;
