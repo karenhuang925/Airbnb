@@ -1,5 +1,5 @@
 const express = require('express')
-const sequelize = require('sequelize');
+const {sequelize,  Op } = require('sequelize');
 const { User } = require('../../db/models');
 const { Spot } = require('../../db/models');
 const { Review } = require('../../db/models');
@@ -76,12 +76,67 @@ const validatePostBooking = [
     handleValidationErrors
 ];
 
+const validateQuery = [
+    check('page')
+        .isInt({min:0, max:10})
+        .withMessage("Page must be greater than or equal to 0"),
+    check('size')
+        .isInt({min:0, max:20})
+        .withMessage("Size must be greater than or equal to 0"),
+    check('maxLat')
+        .isFloat()
+        .withMessage("Maximum latitude is invalid"),
+    check('minLat')
+        .isFloat()
+        .withMessage("Minimum latitude is invalid"),
+    check('maxLng')
+        .isFloat()
+        .withMessage("Maximum longitude is invalid"),
+    check('minLng')
+        .isFloat()
+        .withMessage("Minimum longitude is invalid"),
+    check('minPrice')
+        .isFloat({min:0})
+        .withMessage("Minimum price must be greater than 0"),
+    check('maxPrice')
+        .isFloat({min:0})
+        .withMessage("Maximum price must be greater than 0"),
+    handleValidationErrors
+];
+
 
 //get all spots
 router.get(
     '/',
+    // validateQuery,
     async (req, res) => {
-        const spots = await Spot.findAll();
+
+        let query = {
+            where: {},
+            include: []
+        };
+        const page = req.query.page === undefined ? 0 : parseInt(req.query.page);
+        const size = req.query.size === undefined ? 20 : parseInt(req.query.size);
+        if (page >= 1 && size >= 1) {
+            query.limit = size;
+            query.offset = size * (page - 1);
+        }
+
+        const { minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+
+        if(minLat && maxLat) query.where.lat = {[Op.between]:[minLat, maxLat]};
+        else if(minLat) query.where.lat = {[Op.between]:[-90, maxLat]};
+        else if(maxLat) query.where.lat = {[Op.between]:[minLat, 90]};
+        if(minLng && maxLng) query.where.lng = {[Op.between]:[minLng, maxLng]};
+        else if(minLng) query.where.lng = {[Op.between]:[minLng, 180]};
+        else if(maxLng) query.where.lng = {[Op.between]:[-180, maxLng]};
+        if(minPrice && maxPrice) query.where.price = {[Op.between]:[minPrice, maxPrice]};
+        else if(minPrice) query.where.price = {[Op.and]:{[Op.gt]:minPrice}};
+        else if(maxPrice) query.where.price = {[Op.and]:{[Op.lt]:maxPrice}};
+
+        const spots = await Spot.findAll(
+            query
+        );
         return res.json({spots});
     }
 );
