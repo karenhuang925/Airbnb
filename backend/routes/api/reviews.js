@@ -89,5 +89,49 @@ router.delete(
     }
 )
 
+router.post(
+    '/:reviewid/images',
+    restoreUser,
+    async (req, res, next) => {
+        const {user} = req
+        const reviewId = req.params.reviewid
+        const theReview = await Review.findByPk(reviewId)
+        if(!theReview){
+            const err = new Error("Review couldn't be found");
+            err.title = "Review couldn't be found";
+            err.errors = ["Review couldn't be found"];
+            err.status = 404;
+            return next(err);
+        }
+
+        if (user.id !== theReview.userId){
+            const err = new Error('Unauthorized');
+            err.title = 'Unauthorized';
+            err.errors = ['Unauthorized'];
+            err.status = 401;
+            return next(err);
+        }
+
+        const theNumberImage = await Image.findAll({
+            where: { imageableId: reviewId },
+        })
+        console.log(theNumberImage)
+
+        if (theNumberImage.length >= 10){
+            const err = new Error('Maximum number of images for this resource was reached');
+            err.title = 'Maximum number of images for this resource was reached';
+            err.errors = ['Maximum number of images for this resource was reached'];
+            err.status = 400;
+            return next(err);
+        }
+
+        const imageInfo = req.body
+        const image = await theReview.createImage({url: imageInfo.url})
+        await theReview.addImage(image)
+        return res.json({
+            image
+        });
+    }
+);
 
 module.exports = router;
