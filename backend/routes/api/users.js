@@ -55,8 +55,9 @@ router.post(
       return next(err);
     }
 
-    let token = await setTokenCookie(res, user);
+    let token = setTokenCookie(res, user);
     return res.json({
+      id:user.id,
       email: user.email,
       firstName: user.firstName,
       lastName: user.lastName,
@@ -81,8 +82,13 @@ restoreUser,
 (req, res) => {
   const { user } = req;
   if (user) {
+    let token = setTokenCookie(res, user)
     return res.json({
-      user: user.toSafeObject()
+      id:user.id,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      token:token
     });
   } else return res.json({});
 }

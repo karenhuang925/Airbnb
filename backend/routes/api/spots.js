@@ -1,6 +1,6 @@
 const express = require('express')
-const { sequelize } = require('sequelize');
-const Op = models.Sequelize.Op;
+var { Sequelize } = require('sequelize');
+const { Op } = require("sequelize")
 const { User } = require('../../db/models');
 const { Spot } = require('../../db/models');
 const { Review } = require('../../db/models');
@@ -160,15 +160,15 @@ router.get(
             }],
             attributes: {
                 include: [[
-                        sequelize.fn("COUNT",
-                        sequelize.col("Reviews.spotId")),
+                        Sequelize.fn("COUNT",
+                        Sequelize.col("Reviews.spotId")),
                         "numReviews",
                     ],[
-                        sequelize.fn("AVG",
-                        sequelize.col("Reviews.stars")),
+                        Sequelize.fn("AVG",
+                        Sequelize.col("Reviews.stars")),
                         "avgStarRating"
                     ]],},
-            group: [sequelize.col('Spot.id')]
+            group: [Sequelize.col('Spot.id')]
         });
         return res.json({spots});
     }
