@@ -157,6 +157,10 @@ router.get(
                 model: User,
                 as: "Owner",
                 attributes: {exclude: ["email", "createdAt", "updatedAt", "hashedPassword"]}
+            },
+            {
+                model: Image,
+                attributes: ["url"]
             }],
             attributes: {
                 include: [[
