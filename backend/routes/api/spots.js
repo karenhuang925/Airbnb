@@ -158,8 +158,8 @@ router.get(
                 as: "Owner",
                 attributes: {exclude: ["email", "createdAt", "updatedAt", "hashedPassword"]}
             }],
-            include: {
-                attributes: [[
+            attributes: {
+                include: [[
                         Sequelize.fn("COUNT",
                         Sequelize.col("Reviews.spotId")),
                         "numReviews",
