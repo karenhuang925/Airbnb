@@ -173,7 +173,7 @@ router.get(
                         "avgStarRating"
                     ]],
                 },
-            group: ["Spot.id","Owner.id"]
+            group: ["Spot.id","Owner.id","Image.id"]
         });
         return res.json({spots});
     }
