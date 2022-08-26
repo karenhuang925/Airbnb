@@ -158,8 +158,8 @@ router.get(
                 as: "Owner",
                 attributes: {exclude: ["email", "createdAt", "updatedAt", "hashedPassword"]}
             }],
-            attributes: {
-                include: [[
+            include: {
+                attributes: [[
                         Sequelize.fn("COUNT",
                         Sequelize.col("Reviews.spotId")),
                         "numReviews",
@@ -168,8 +168,8 @@ router.get(
                         Sequelize.col("Reviews.stars")),
                         "avgStarRating"
                     ]],
-                    group: ["Spot.id"]
                 },
+            group: ["Spot.id"]
         });
         return res.json({spots});
     }
