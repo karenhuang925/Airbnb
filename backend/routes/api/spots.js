@@ -159,6 +159,7 @@ router.get(
                 attributes: {exclude: ["email", "createdAt", "updatedAt", "hashedPassword"]}
             }],
             attributes: {
+                group: [Sequelize.col('Spot.id')],
                 include: [[
                         Sequelize.fn("COUNT",
                         Sequelize.col("Reviews.spotId")),
@@ -168,7 +169,6 @@ router.get(
                         Sequelize.col("Reviews.stars")),
                         "avgStarRating"
                     ]],},
-            group: [Sequelize.col('Spot.id')]
         });
         return res.json({spots});
     }
