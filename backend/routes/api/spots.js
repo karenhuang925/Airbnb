@@ -1,5 +1,6 @@
 const express = require('express')
-const {sequelize,  Op } = require('sequelize');
+const { sequelize } = require('sequelize');
+const Op = models.Sequelize.Op;
 const { User } = require('../../db/models');
 const { Spot } = require('../../db/models');
 const { Review } = require('../../db/models');
