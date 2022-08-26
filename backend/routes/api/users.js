@@ -1,9 +1,7 @@
 const express = require('express')
 
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
-const { User } = require('../../db/models');
-const { Spot } = require('../../db/models');
-const { Image } = require('../../db/models');
+const { User, Spot, Image } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
@@ -107,7 +105,7 @@ router.post(
       }
 
       const user = await User.signup({ firstName, lastName, email, password });
-      // let token = await setTokenCookie(res, user);
+      let token = setTokenCookie(res, user);
       // user.update({
       //   token: token
       // })
