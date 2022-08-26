@@ -169,7 +169,7 @@ router.get(
                         "avgStarRating"
                     ]],
                 },
-            group: ["Spot.id"]
+            group: ["Spot.id","Owner.id"]
         });
         return res.json({spots});
     }
