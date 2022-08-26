@@ -159,7 +159,6 @@ router.get(
                 attributes: {exclude: ["email", "createdAt", "updatedAt", "hashedPassword"]}
             }],
             attributes: {
-                group:'Spot.id',
                 include: [[
                         Sequelize.fn("COUNT",
                         Sequelize.col("Reviews.spotId")),
@@ -168,7 +167,9 @@ router.get(
                         Sequelize.fn("AVG",
                         Sequelize.col("Reviews.stars")),
                         "avgStarRating"
-                    ]],},
+                    ]],
+                    group: ["Spot.Id"]
+                },
         });
         return res.json({spots});
     }
@@ -308,7 +309,7 @@ router.post(
         }
 
         const existingReviews = await Review.findAll({
-            where: { spotId, userid: user.id }
+            where: { spotId, userId: user.Id }
         })
         if (existingReviews.length !== 0){
             const err = new Error("User already has a review for this spot");
@@ -320,7 +321,7 @@ router.post(
 
         const reviewInfo = req.body
         const newReview = await Review.create({
-            userId:user.id,
+            userId:user.Id,
             spotId:spotId,
             content:reviewInfo.content,
             stars: reviewInfo.stars,
