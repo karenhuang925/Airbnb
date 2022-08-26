@@ -168,7 +168,7 @@ router.get(
                         Sequelize.col("Reviews.stars")),
                         "avgStarRating"
                     ]],
-                    group: ["Spot.Id"]
+                    group: ["Spot.id"]
                 },
         });
         return res.json({spots});
@@ -298,6 +298,7 @@ router.post(
     validatePostReview,
     async (req, res, next) => {
         const {user} = req
+        console.log(req)
         const spotId = req.params.spotid
         const theSpot = await Spot.findByPk(spotId)
         if(!theSpot){
@@ -309,7 +310,7 @@ router.post(
         }
 
         const existingReviews = await Review.findAll({
-            where: { spotId, userId: user.Id }
+            where: { spotId, userId: user.id }
         })
         if (existingReviews.length !== 0){
             const err = new Error("User already has a review for this spot");
@@ -321,7 +322,7 @@ router.post(
 
         const reviewInfo = req.body
         const newReview = await Review.create({
-            userId:user.Id,
+            userId:user.id,
             spotId:spotId,
             content:reviewInfo.content,
             stars: reviewInfo.stars,
