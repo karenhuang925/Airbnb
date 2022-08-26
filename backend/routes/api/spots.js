@@ -150,18 +150,6 @@ router.get(
         const id = req.params.id
         const spots = await Spot.findAll({
             where: { id },
-            include: [{
-                model: Review,
-                attributes: []
-            },{
-                model: User,
-                as: "Owner",
-                attributes: {exclude: ["email", "createdAt", "updatedAt", "hashedPassword"]}
-            },
-            {
-                model: Image,
-                attributes: ["url"]
-            }],
             attributes: {
                 include: [[
                         Sequelize.fn("COUNT",
@@ -173,7 +161,19 @@ router.get(
                         "avgStarRating"
                     ]],
                 },
-            group: ["Spot.id","Owner.id","Image.id"]
+            group: ["Spot.id"],
+            include: [{
+                model: Review,
+                attributes: []
+            },{
+                model: User,
+                as: "Owner",
+                attributes: {exclude: ["email", "createdAt", "updatedAt", "hashedPassword"]}
+            },{
+                model: Image,
+                attributes: ["url"]
+            }],
+
         });
         return res.json({spots});
     }
