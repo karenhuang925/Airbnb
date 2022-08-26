@@ -9,6 +9,7 @@ const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth')
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { route } = require('./users');
+const { DATEONLY } = require('sequelize');
 const router = express.Router();
 
 router.put(
@@ -39,7 +40,9 @@ router.put(
 
 
         //Can't edit a booking that's past the end date
-        if (theBooking.endDate < Date(Date.now())){
+        const bookingEndDate = Date.parse(theBooking.endDate)
+
+        if (Date.parse(theBooking.endDate) < Date.now()){
             const err = new Error("Past bookings can't be modified");
             err.title = "Past bookings can't be modified";
             err.errors = ["Past bookings can't be modified"];
@@ -87,7 +90,7 @@ router.delete(
         }
 
         //started booking cannot delete
-        if (theBooking.startDate < Date(Date.now())){
+        if (Date.parse(theBooking.startDate) < Date.now()){
             const err = new Error("Bookings that have been started can't be deleted");
             err.title = "Bookings that have been started can't be deleted";
             err.errors = ["Bookings that have been started can't be deleted"];

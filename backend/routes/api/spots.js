@@ -298,7 +298,6 @@ router.post(
     validatePostReview,
     async (req, res, next) => {
         const {user} = req
-        console.log(req)
         const spotId = req.params.spotid
         const theSpot = await Spot.findByPk(spotId)
         if(!theSpot){
