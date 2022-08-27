@@ -150,7 +150,7 @@ router.get(
 //get spot by id
 router.get(
     '/:id',
-    async (req, res) => {
+    async (req, res, next) => {
         const id = req.params.id
         const theSpot = await Spot.findOne({
             where: { id },
@@ -164,7 +164,7 @@ router.get(
                         Sequelize.col("Reviews.stars")),
                         "avgStarRating"
                     ]],
-                },
+                exclude: "previewImage" },
             group: ["Spot.id", "Owner.id", "Images.id"],
             include: [{
                 model: Review,
@@ -177,8 +177,14 @@ router.get(
                 model: Image,
                 attributes: ["url"]
             }],
-
         });
+        if(!theSpot){
+            const err = new Error();
+            err.title = "Spot couldn't be found";
+            err.errors = ["Spot couldn't be found"];
+            err.status = 404;
+            return next(err);
+        }
         return res.json(theSpot);
     }
 );
@@ -425,45 +431,49 @@ router.post(
 
         const BookingInfo = req.body
 
-        // const existingBooking = await Booking.findAll({
-        //     where: { spotId },
-        //     attributes:["startDate","endDate"]
-        // })
-        // console.log(existingBooking)
+        const existingBooking = await Booking.findAll({
+            where: { spotId },
+        })
+
+        for (let i = 0; i < existingBooking.length; i++){
+            if ( BookingInfo.startDate >= existingBooking[i].startDate
+                &&
+                BookingInfo.startDate <= existingBooking[i].endDate ){
+                    const err = new Error("Booking time conflict");
+                    err.title = "Booking time conflict";
+                    err.errors = ["Start date conflicts with an existing booking"];
+                    err.status = 403;
+                    return next(err);
+            }
+            if ( BookingInfo.endDate >= existingBooking[i].startDate
+                &&
+                BookingInfo.endDate <= existingBooking[i].endDate ){
+                    const err = new Error("Booking time conflict");
+                    err.title = "Booking time conflict";
+                    err.errors = ["End date conflicts with an existing booking"];
+                    err.status = 403;
+                    return next(err);
+
+            }
+            if ( BookingInfo.startDate < existingBooking[i].startDate
+                &&
+                BookingInfo.endDate > existingBooking[i].startDate ){
+                    const err = new Error("Booking time conflict");
+                    err.title = "Booking time conflict";
+                    err.errors = ["spot is already booked for the specified dates"];
+                    err.status = 403;
+                    return next(err);
+            }
+    }
 
 
-        // console.log("existingStartDate ",existingBooking.startDate,
-        //             "existingEndDate", existingBooking.endDate,
-        //             "BookingStartDate ", BookingInfo.startDate,
-        //             "BookingInfo.endDate ", BookingInfo.endDate )
-        // if ( BookingInfo.startDate >= existingStartDate
-        //     &&
-        //     BookingInfo.startDate <= startDate ){
-        //         const err = new Error("Sorry, this spot is already booked for the specified dates");
-        //         err.title = "Start date conflicts with an existing booking";
-        //         err.errors = ["Start date conflicts with an existing booking"];
-        //         err.status = 403;
-        //         return next(err);
-        // }
-
-        // if ( BookingInfo.endDate >= existingEndDate
-        //     &&
-        //     BookingInfo.endDate <= existingEndDate ){
-        //         const err = new Error("Sorry, this spot is already booked for the specified dates");
-        //         err.title = "Start date conflicts with an existing booking";
-        //         err.errors = ["Start date conflicts with an existing booking"];
-        //         err.status = 403;
-        //         return next(err);
-        // }
-
-
-        // if (existingBooking.startDate ){
-        //     const err = new Error("Sorry, this spot is already booked for the specified dates");
-        //     err.title = "Start date conflicts with an existing booking";
-        //     err.errors = ["Start date conflicts with an existing booking"];
-        //     err.status = 403;
-        //     return next(err);
-        // }
+        if (existingBooking.startDate ){
+            const err = new Error("Sorry, this spot is already booked for the specified dates");
+            err.title = "Start date conflicts with an existing booking";
+            err.errors = ["Start date conflicts with an existing booking"];
+            err.status = 403;
+            return next(err);
+        }
 
         if(BookingInfo.startDate >= BookingInfo.endDate){
             const err = new Error('Booking start date is later or equal than end Date');
