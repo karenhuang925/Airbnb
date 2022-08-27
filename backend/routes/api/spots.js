@@ -136,9 +136,13 @@ router.get(
         else if(maxPrice) query.where.price = {[Op.and]:{[Op.lt]:maxPrice}};
 
         const Spots = await Spot.findAll(
-            query
+            query,
         );
-        return res.json({Spots});
+        return res.json({
+            Spots,
+            page,
+            size
+        });
     }
 );
 
@@ -148,7 +152,7 @@ router.get(
     '/:id',
     async (req, res) => {
         const id = req.params.id
-        const spots = await Spot.findAll({
+        const theSpot = await Spot.findOne({
             where: { id },
             attributes: {
                 include: [[
@@ -161,7 +165,7 @@ router.get(
                         "avgStarRating"
                     ]],
                 },
-            // group: ["Spot.id", "Owner.id", "Image.id"],
+            group: ["Spot.id", "Owner.id"],
             include: [{
                 model: Review,
                 attributes: []
@@ -175,7 +179,7 @@ router.get(
             }],
 
         });
-        return res.json({spots});
+        return res.json(theSpot);
     }
 );
 
@@ -234,7 +238,21 @@ router.put(
         theSpot.update(
             spotInfo
         )
-        return res.json({theSpot});
+        return res.json({
+            id:theSpot.id,
+            ownerId:theSpot.ownerId,
+            address:theSpot.address,
+            city:theSpot.city,
+            state:theSpot.state,
+            country:theSpot.country,
+            lat:theSpot.lat,
+            lng:theSpot.lng,
+            name:theSpot.name,
+            description:theSpot.description,
+            price:theSpot.price,
+            createdAt:theSpot.createdAt,
+            updatedAt:theSpot.updatedAt
+        });
     }
 )
 
@@ -331,9 +349,9 @@ router.post(
             content:reviewInfo.content,
             stars: reviewInfo.stars,
         })
-        return res.json({
+        return res.json(
             newReview
-        });
+        );
     }
 );
 

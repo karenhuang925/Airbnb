@@ -128,9 +128,9 @@ router.post(
         const imageInfo = req.body
         const image = await theReview.createImage({url: imageInfo.url})
         await theReview.addImage(image)
-        return res.json({
+        return res.json(
             image
-        });
+        );
     }
 );
 
