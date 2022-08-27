@@ -117,6 +117,7 @@ router.post(
       // })
 
       return res.json({
+        id: user.id,
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -131,8 +132,8 @@ router.get(
   restoreUser,
   async (req, res, next) => {
     const { user } = req
-    const spots = await user.getSpots();
-    return res.json({spots});
+    const Spots = await user.getSpots();
+    return res.json({Spots});
   }
 );
 
@@ -142,7 +143,7 @@ router.get(
   restoreUser,
   async (req, res, next) => {
       const { user } = req
-      const reviews = await user.getReviews({
+      const Reviews = await user.getReviews({
         include: [{
           model: User,
           attributes: ["id", "firstName", "lastName"]
@@ -156,7 +157,7 @@ router.get(
         }]
 
       });
-      return res.json({reviews});
+      return res.json({Reviews});
   }
 );
 
@@ -166,14 +167,14 @@ router.get(
   restoreUser,
   async (req, res, next) => {
       const { user } = req
-      const bookings = await user.getBookings({
+      const Bookings = await user.getBookings({
         include: [{
           model: Spot,
           attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "price", "previewImage"]
         }]
 
       });
-      return res.json({bookings});
+      return res.json({Bookings});
   }
 );
 

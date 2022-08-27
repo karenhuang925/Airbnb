@@ -56,7 +56,7 @@ router.put(
         theBooking.update(
             bookingInfo
         )
-        return res.json({theBooking});
+        return res.json(theBooking);
     }
 )
 

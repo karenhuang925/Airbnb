@@ -55,7 +55,7 @@ router.put(
         theReview.update(
             reviewInfo
         )
-        return res.json({theReview});
+        return res.json(theReview);
     }
 )
 
