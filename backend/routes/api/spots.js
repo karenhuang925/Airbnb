@@ -161,7 +161,7 @@ router.get(
                         "avgStarRating"
                     ]],
                 },
-            group: ["Spot.id"],
+            // group: ["Spot.id", "Owner.id", "Image.id"],
             include: [{
                 model: Review,
                 attributes: []
