@@ -125,15 +125,70 @@ router.get(
 
         const { minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
 
-        if(minLat && maxLat) query.where.lat = {[Op.between]:[minLat, maxLat]};
-        else if(minLat) query.where.lat = {[Op.between]:[-90, maxLat]};
-        else if(maxLat) query.where.lat = {[Op.between]:[minLat, 90]};
-        if(minLng && maxLng) query.where.lng = {[Op.between]:[minLng, maxLng]};
-        else if(minLng) query.where.lng = {[Op.between]:[minLng, 180]};
-        else if(maxLng) query.where.lng = {[Op.between]:[-180, maxLng]};
-        if(minPrice && maxPrice) query.where.price = {[Op.between]:[minPrice, maxPrice]};
-        else if(minPrice) query.where.price = {[Op.and]:{[Op.gt]:minPrice}};
-        else if(maxPrice) query.where.price = {[Op.and]:{[Op.lt]:maxPrice}};
+        if(minLat && maxLat) {
+            check('maxLat')
+                .isFloat({mins:-90,max:90})
+                .withMessage("Maximum latitude is invalid"),
+            check('minLat')
+                .isFloat({mins:-90,max:90})
+                .withMessage("Minimum latitude is invalid"),
+            handleValidationErrors
+            query.where.lat = {[Op.between]:[minLat, maxLat]};
+        }
+        else if(minLat) {
+            check('maxLat')
+            .isFloat({mins:-90,max:90})
+            .withMessage("Maximum latitude is invalid"),
+            handleValidationErrors
+            query.where.lat = {[Op.between]:[-90, maxLat]};}
+        else if(maxLat) {
+            check('minLat')
+                .isFloat({mins:-90,max:90})
+                .withMessage("Minimum latitude is invalid"),
+            handleValidationErrors
+            query.where.lat = {[Op.between]:[minLat, 90]};}
+        if(minLng && maxLng) {
+            check('maxLng')
+                .isFloat({min:-180,max:180})
+                .withMessage("Maximum latitude is invalid"),
+            check('minLng')
+                .isFloat({min:-180,max:180})
+                .withMessage("Minimum latitude is invalid"),
+            handleValidationErrors
+            query.where.lng = {[Op.between]:[minLng, maxLng]};}
+        else if(minLng) {
+            check('maxLng')
+                .isFloat({min:-180,max:180})
+                .withMessage("Maximum latitude is invalid"),
+                handleValidationErrors
+            query.where.lng = {[Op.between]:[minLng, 180]};}
+        else if(maxLng) {
+            check('minLng')
+                .isFloat({min:-180,max:180})
+                .withMessage("Minimum latitude is invalid"),
+            handleValidationErrors
+            query.where.lng = {[Op.between]:[-180, maxLng]};}
+        if(minPrice && maxPrice) {
+            check('minPrice')
+                .isFloat({min:0})
+                .withMessage("Minimum price must be greater than 0"),
+            check('maxPrice')
+                .isFloat({min:0})
+                .withMessage("Maximum price must be greater than 0"),
+            handleValidationErrors
+            query.where.price = {[Op.between]:[minPrice, maxPrice]};}
+        else if(minPrice) {
+            check('minPrice')
+                .isFloat({min:0})
+                .withMessage("Minimum price must be greater than 0"),
+            handleValidationErrors
+            query.where.price = {[Op.and]:{[Op.gt]:minPrice}};}
+        else if(maxPrice) {
+            check('maxPrice')
+                .isFloat({min:0})
+                .withMessage("Maximum price must be greater than 0"),
+            handleValidationErrors
+            query.where.price = {[Op.and]:{[Op.lt]:maxPrice}};}
 
         const Spots = await Spot.findAll(
             query,
