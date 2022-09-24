@@ -115,7 +115,7 @@ router.post(
         const theNumberImage = await Image.findAll({
             where: { imageableId: reviewId },
         })
-        console.log(theNumberImage)
+        // console.log(theNumberImage)
 
         if (theNumberImage.length >= 10){
             const err = new Error('Maximum number of images for this resource was reached');
