@@ -6,6 +6,8 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
+import { singlePublicFileUpload, singleMulterUpload } from '../../awsS3';
+
 const validateLogin = [
   check('email')
     .exists({ checkFalsy: true })
@@ -97,10 +99,11 @@ restoreUser,
 // Sign up
 router.post(
     '/signup',
+    singleMulterUpload("image"),
     validateSignup,
     async (req, res, next) => {
       const { firstName, lastName, email, password } = req.body;
-
+      const profileImageUrl = await singlePublicFileUpload(req.file);
       const existinguser = await User.getOneBy(email)
       if (existinguser){
         const err = new Error('User already exists');
@@ -110,7 +113,7 @@ router.post(
         return next(err);
       }
 
-      const user = await User.signup({ firstName, lastName, email, password });
+      const user = await User.signup({ firstName, lastName, email, password, profileImageUrl});
       let token = setTokenCookie(res, user);
       // user.update({
       //   token: token
