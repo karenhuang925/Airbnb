@@ -24,12 +24,18 @@ const Navigation = (isLoaded) => {
     }
     return (
             <ul>
-            <li>
-                <NavLink exact to="/">
-                    <i className="fas fa-house">
-                    </i>Home</NavLink>
-                {isLoaded && sessionLinks}
-            </li>
+                <li>
+                    <NavLink exact to="/">
+                        <i className="fas fa-bars">
+                        </i></NavLink>
+                    {isLoaded && sessionLinks}
+                </li>
+                <li>
+                    <NavLink exact to="/spots">
+                        <i className="fas fa-loction-dot"></i>
+                        Listing
+                    </NavLink>
+                </li>
             </ul>
     );
 }
