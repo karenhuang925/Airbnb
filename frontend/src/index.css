@@ -1,13 +1,16 @@
 /* TODO Add site wide styles */
-div {
+*{
+    font-family:'Open Sans', 'Helvetica Neue', sans-serif ;
+}
+/* div {
     width: 50vw;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     padding: 10px;
-}
+} */
 
-a {
+/* a {
     color: rgb(77, 74, 74);
     text-decoration: none;
     font-size: 1.1em;
@@ -17,7 +20,7 @@ a {
 div {
     background: #F5F5F5;
 
-}
+} */
 /*
 form {
     width: 50vw;

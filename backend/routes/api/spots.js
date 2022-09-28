@@ -46,11 +46,15 @@ const validateCreateOrEditSpot = [
     check('description')
         .exists({ checkFalsy: true })
         .notEmpty()
-        .withMessage('Description address is required'),
+        .withMessage('Description is required'),
     check('price')
         .exists({ checkFalsy: true })
         .notEmpty()
-        .withMessage('Price address is required'),
+        .withMessage('Price  is required'),
+    check('previewImage')
+        .exists({ checkFalsy: true })
+        .isURL()
+        .withMessage('Preview image is required'),
     handleValidationErrors
 ];
 
@@ -265,7 +269,8 @@ router.post(
             lng:spotInfo.lng,
             name:spotInfo.name,
             description:spotInfo.description,
-            price:spotInfo.price
+            price:spotInfo.price,
+            previewImage:spotInfo.previewImage
         })
         return res.json(
             spot

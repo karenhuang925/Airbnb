@@ -1,14 +1,24 @@
 .singleSpot {
-    display: flex;
-    justify-content: right;
-    align-items: right;
+    display: grid;
+    /* flex-direction: row; */
+    justify-content: center;
+    /* align-items: right; */
     border: 1px solid black;
+    padding: 10px
 }
 
 
-
-img {
+.previewImg {
     border: 1px inset rgb(161, 158, 158);
     background: rgb(161, 158, 158);
     margin: 30px;
+    width: 50%
+}
+
+.spotList {
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 10px;
 }

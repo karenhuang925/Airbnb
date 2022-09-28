@@ -26,8 +26,8 @@ const Navigation = (isLoaded) => {
             <ul>
                 <li>
                     <NavLink exact to="/">
-                        <i className="fas fa-bars">
-                        </i></NavLink>
+                        <i className="fas fa-bars"></i>
+                    </NavLink>
                     {isLoaded && sessionLinks}
                 </li>
                 <li>

@@ -5,16 +5,16 @@ module.exports = {
     return queryInterface.bulkInsert('Spots', [
       {
         ownerId: 1,
-        address: "123 Disney Lane",
-        city: "San Francisco",
-        state: "CA",
+        address: "123 Miramar Beach Lane",
+        city: "Florida",
+        state: "Miramar",
         country: "United States of America",
         lat: 57.7645358,
         lng: -122.4730327,
-        name: "House 1 by the sea",
-        description: "Place where web developers are created",
-        price: 123,
-        previewImage:"https://www.zillowstatic.com/s3/homepage/static/ZillowTimberlake_2098_DT_Full.jpg"
+        name: "Treasure Chest - Gulf View, Heated Private Pool, Easy Walk to the Beach!",
+        description: "Treasure Chest - This charming vacation home has four bedrooms and can sleep up to 12 happy beachgoers. It is located in a sought-after location off Scenic Gulf Drive in Destin’s Miramar Beach. You will find yourself in the heart of everything this area has to offer, but since you are tucked away in a private residential neighborhood you will be in a wonderful world of your own. The pristine beach is just a short stroll away with no roads to cross. However, you don’t have to take more than a few steps to enjoy a refreshing dip since this home has a private pool. The lagoon shaped pool has a lovely landscaped setting out back that is adorned with towering palm trees, tropical plantings, a paver tiled patio, a raised sun deck and an attractive arbor with plenty of seating for leisurely lounging. A gas grill, tables and chairs may inspire you to create your own Surf n Turf meal while enjoying favorite drinks before dining poolside.",
+        price: 350,
+        previewImage:"https://media.vrbo.com/lodging/26000000/25730000/25726600/25726512/c0023210.f10.jpg"
       },
       {
         ownerId: 1,
