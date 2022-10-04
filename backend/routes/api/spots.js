@@ -31,13 +31,13 @@ const validateCreateOrEditSpot = [
         .notEmpty()
         .withMessage('Country address is required'),
     check('lat')
-        .exists({ checkFalsy: true })
+        // .exists({ checkFalsy: true })
         .isFloat({ min: -90, max: 90 })
         .withMessage('Latitude is not valid'),
     check('lng')
-        .exists({ checkFalsy: true })
+        // .exists({ checkFalsy: true })
         .isFloat({ min: -180, max: 180 })
-        .withMessage('Latitude is not valid'),
+        .withMessage('Longtitude is not valid'),
     check('name')
         .exists({ checkFalsy: true })
         .isLength({ max: 50 })
@@ -48,7 +48,7 @@ const validateCreateOrEditSpot = [
         .notEmpty()
         .withMessage('Description is required'),
     check('price')
-        .exists({ checkFalsy: true })
+        // .exists({ checkFalsy: true })
         .notEmpty()
         .withMessage('Price  is required'),
     check('previewImage')
@@ -223,8 +223,8 @@ router.get(
                         Sequelize.fn("AVG",
                         Sequelize.col("Reviews.stars")),
                         "avgStarRating"
-                    ]],
-                exclude: "previewImage" },
+                    ]]
+                },
             group: ["Spot.id", "Owner.id", "Images.id"],
             include: [{
                 model: Review,
@@ -318,7 +318,8 @@ router.put(
             description:theSpot.description,
             price:theSpot.price,
             createdAt:theSpot.createdAt,
-            updatedAt:theSpot.updatedAt
+            updatedAt:theSpot.updatedAt,
+            previewImage:theSpot.previewImage
         });
     }
 )

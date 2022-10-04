@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { addSpotFetch } from '../../store/spot'
+import { editSpotFetch } from '../../store/spot'
 import { useDispatch } from 'react-redux';
 import './SpotForm.css'
 
 const SpotForm = ({ spot, formType }) => {
+
     const dispatch = useDispatch()
-    // const history = useHistory();
+    const history = useHistory();
     const [address, setAddress] = useState(spot.address);
     const [city, setCity] = useState(spot.city);
     const [state, setState] = useState(spot.state);
@@ -17,12 +19,26 @@ const SpotForm = ({ spot, formType }) => {
     const [description, setDescription] = useState(spot.description);
     const [price, setPrice] = useState(spot.price);
     const [previewImage, setPreviewImage] = useState(spot.previewImage);
+    const [errors, setErrors] = useState([]);
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setErrors([]);
         spot = { ...spot, address, city, state, country, name, lat, lng, description, price, previewImage };
-
-        dispatch(addSpotFetch(spot))
+        if (formType === "Create spot"){
+            return dispatch(addSpotFetch(spot)).catch(
+                async (error) => {
+                    if (error) setErrors(error.message);
+                }
+            );
+        } else if(formType === "Edit spot"){
+            return dispatch(editSpotFetch(spot)).catch(
+                async (error) => {
+                    if (error) setErrors(error.message);
+                }
+            );
+        }
         // history.push(`/spots/${spot.id}`);
     };
 
@@ -31,6 +47,9 @@ const SpotForm = ({ spot, formType }) => {
             <h2>{formType}</h2>
             <h3>Let's get started</h3>
             <p>Where's your place located? <br/>Enter your address</p>
+            <ul>
+                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+            </ul>
             <label>
                 Address
                 <input
