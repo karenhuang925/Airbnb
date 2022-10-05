@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import * as reviewActions from '../../store/review';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect,useHistory } from 'react-router-dom';
 
 
 const ReviewFormPage = ({review, formType}) => {
+    const history = useHistory()
     const dispatch = useDispatch();
-    const [content, setContent] = useState('')
-    const [stars, setStars] = useState(0)
+    const [content, setContent] = useState(review.content)
+    const [stars, setStars] = useState(review.stars)
     const [errors, setErrors] = useState([]);
 
 
@@ -19,17 +20,17 @@ const ReviewFormPage = ({review, formType}) => {
         if (formType === "Create review"){
             return dispatch(reviewActions.addReviewFetch(review)).catch(
                 async (error) => {
-                    if (error) setErrors(error.message);
+                    if (error) setErrors([error.message]);
                 }
             );
         } else if(formType === "Edit review"){
-            // return dispatch(editSpotFetch(spot)).catch(
-            //     async (res) => {
-            //         const data = await res.json();
-            //         if (data && data.errors) setErrors(data.errors);
-            //     }
-            // );
+            return dispatch(reviewActions.editReviewFetch(review)).catch(
+                async (error) => {
+                    if (error) setErrors([error.message]);
+                }
+            );
         }
+        history.push(`/users/my/reviews`);
 
     };
 

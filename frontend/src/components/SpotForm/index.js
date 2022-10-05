@@ -30,12 +30,15 @@ const SpotForm = ({ spot, formType }) => {
             return dispatch(addSpotFetch(spot)).catch(
                 async (error) => {
                     if (error) setErrors(error.message);
+
                 }
             );
         } else if(formType === "Edit spot"){
             return dispatch(editSpotFetch(spot)).catch(
                 async (error) => {
                     if (error) setErrors(error.message);
+                    console.log(errors)
+
                 }
             );
         }

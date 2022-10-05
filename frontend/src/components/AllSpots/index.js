@@ -3,7 +3,6 @@ import * as spotActions from '../../store/spot';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Route } from 'react-router-dom';
 import LoginFormModal from '../LoginFormModal';
-import CreateSpotForm from '../CreateSpotForm'
 import './AllSpots.css';
 
 

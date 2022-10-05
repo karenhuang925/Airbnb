@@ -19,7 +19,7 @@ const ReviewBySpot = ({spotId}) => {
             async (error) => {
                 if (error) setErrors(error.message);
             })
-    }, [useEffect]);
+    }, [dispatch]);
     const reviews = useSelector(state => state.review.Reviews);
     return (
         <div className="row">

@@ -51,9 +51,7 @@ const SingleSpot = () => {
         } else {
             if(sessionUser){
                 editAndDelete = (
-                    <>
-                            <ReviewFormModal />
-                    </>
+                    <ReviewFormModal />
                 );
             }
         }
@@ -74,10 +72,7 @@ const SingleSpot = () => {
                     <span className="fa fa-star"></span>
                     <p>{parseFloat(spot.avgStarRating).toFixed(2)} average based on {spot.numReviews} reviews.</p>
                     <hr style={{border: "3px", solid:"#f1f1f1"}}></hr>
-
-
                     <ReviewBySpot spotId={spot.id} />
-
                 </>
             )
         }
