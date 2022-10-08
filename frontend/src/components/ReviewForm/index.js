@@ -20,7 +20,8 @@ const ReviewFormPage = ({review, formType}) => {
         e.preventDefault();
         review = { ...review, content, stars };
         if (formType === "Create review"){
-            dispatch(reviewActions.addReviewFetch(review)).catch(
+            dispatch(reviewActions.addReviewFetch(review))
+            .catch(
                 async (res) => {
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors);
@@ -30,7 +31,12 @@ const ReviewFormPage = ({review, formType}) => {
                 setRedirect(true)
             }
         } else if(formType === "Edit review"){
-            dispatch(reviewActions.editReviewFetch(review)).catch(
+            dispatch(reviewActions.editReviewFetch(review))
+            .then(
+                ()=>{
+                    dispatch(reviewActions.reviewByUserFetch())
+                }
+            ).catch(
                 async (res) => {
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors);

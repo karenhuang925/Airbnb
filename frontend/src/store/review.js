@@ -6,23 +6,23 @@ const DELETE_REVIEW = 'Review/DELETE'
 const EDIT_REVIEW = 'Review/EDIT'
 
 export const getReview = (payload) => {
-    return {type: GET_REVIEW, payload}
+    return { type: GET_REVIEW, payload }
 }
 export const addReview = (payload) => {
-    return {type: ADD_REVIEW, payload}
+    return { type: ADD_REVIEW, payload }
 }
 export const editReview = (payload) => {
-    return {type: EDIT_REVIEW, payload}
+    return { type: EDIT_REVIEW, payload }
 }
 export const deleteReview = (payload) => {
-    return {type: DELETE_REVIEW, payload}
+    return { type: DELETE_REVIEW, payload }
 }
 
 
 export const reviewBySpotFetch = (spotId) => async dispatch => {
     const response = await fetch(`/api/spots/${spotId}/reviews`);
     const reviews = await response.json();
-    if(response.status !== 200){
+    if (response.status !== 200) {
         throw Error("Spot couldn't be found")
     }
     dispatch(getReview(reviews));
@@ -31,7 +31,7 @@ export const reviewBySpotFetch = (spotId) => async dispatch => {
 export const reviewByUserFetch = () => async dispatch => {
     const response = await csrfFetch('/api/users/my/reviews');
     const reviews = await response.json();
-    if(response.status !== 200){
+    if (response.status !== 200) {
         throw Error("Spot couldn't be found")
     }
     dispatch(getReview(reviews));
@@ -67,34 +67,41 @@ export const deleteReviewFetch = (id) => async dispatch => {
 }
 
 
-const initialState = {review: null};
+const initialState = { review: null };
 
 
 const reviewReducer = (state = initialState, action) => {
     let newState
     let index;
-    switch (action.type){
+    switch (action.type) {
         case GET_REVIEW:
-            newState = {...state};
+            newState = { ...state };
             newState = action.payload;
             return newState;
         case ADD_REVIEW:
-            index = state.Reviews.length
-            newState = {...state};
+            index = state.Reviews.length || 0
+            newState = { ...state };
             newState.Reviews[index] = action.payload
             return newState;
         case EDIT_REVIEW:
             index = state.Reviews.findIndex(review => review.id === action.payload.id);
-            newState = {...state};
+            newState = {
+                ...state
+                // review: {
+                //     ...state.review,
+                //     // review.Reviews[index] = {}
+                // }
+            };
             newState.Reviews[index] = action.payload
+
             return newState;
         case DELETE_REVIEW:
             index = state.Reviews.findIndex(review => review.id === action.payload);
-            newState = {...state}
+            newState = { ...state }
             delete newState.Reviews[index]
             return newState
         default:
-        return state
+            return state
     }
 }
 

@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 const UserReview = () => {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState([]);
-    let reviews = useSelector(state => state.review.Reviews);
+    let reviews = useSelector(state => state.review.Reviews) || "";
 
     useEffect(() => {
         dispatch(reviewActions.reviewByUserFetch())
