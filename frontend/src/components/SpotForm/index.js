@@ -34,23 +34,28 @@ const SpotForm = ({ spot, formType }) => {
         setErrors([]);
         spot = { ...spot, address, city, state, country, name, lat, lng, description, price, previewImage };
         if (formType === "Create spot"){
-            dispatch(addSpotFetch(spot)).catch(
+            dispatch(addSpotFetch(spot))
+            .then((()=> {
+                setRedirect(true)}))
+            .catch(
                 async (res) => {
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors);
+                    console.log('here')
                 }
             );
-            setRedirect(true)
         } else if(formType === "Edit spot"){
-            dispatch(editSpotFetch(spot)).catch(
+            dispatch(editSpotFetch(spot))
+            .then((()=> {
+                setRedirect(true)}))
+            .catch(
                 async (res) => {
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors);
+                    console.log(errors)
                 }
             );
-            setRedirect(true)
         }
-
     };
 
     return (

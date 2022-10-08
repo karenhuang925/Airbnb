@@ -21,20 +21,19 @@ const ReviewFormPage = ({review, formType}) => {
         review = { ...review, content, stars };
         if (formType === "Create review"){
             dispatch(reviewActions.addReviewFetch(review))
+            .then(()=>setRedirect(true))
             .catch(
                 async (res) => {
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors);
                 }
             );
-            if(errors.length === 0){
-                setRedirect(true)
-            }
         } else if(formType === "Edit review"){
             dispatch(reviewActions.editReviewFetch(review))
             .then(
                 ()=>{
                     dispatch(reviewActions.reviewByUserFetch())
+                    setRedirect(true)
                 }
             ).catch(
                 async (res) => {
@@ -42,11 +41,6 @@ const ReviewFormPage = ({review, formType}) => {
                     if (data && data.errors) setErrors(data.errors);
                 }
             );
-            if(errors.length === 0){
-                console.log('here')
-
-                setRedirect(true)
-            }
         }
     };
 
