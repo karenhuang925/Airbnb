@@ -66,7 +66,7 @@ const SingleSpot = () => {
         }
         console.log(typeof(spot?.numReviews))
         console.log(typeof(parseInt(0)))
-        if ((spot?.numReviews) === parseInt(0)){
+        if ((parseInt(spot?.numReviews)) === parseInt(0)){
             showReview = (
                 <p>This spot doesn't have review yet</p>
             )
