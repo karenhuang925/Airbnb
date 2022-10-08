@@ -2,6 +2,7 @@
 
 ## Technologies
 Sequelize/Express
+
 React/Redux
 
 ## Quick Links
