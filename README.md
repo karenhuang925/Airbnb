@@ -1,5 +1,17 @@
 # Airbnb
 
+## Technologies
+Sequelize/Express
+React/Redux
+
+## Quick Links
+[Getting Started](https://kairbnb.herokuapp.com)
+[Database Schema Design](https://github.com/karenhuang925/Airbnb/edit/main/README.md#database-schema-design)
+[API Documentation](https://github.com/karenhuang925/Airbnb/edit/main/README.md#api-documentation)
+[Frontend Features]
+[Frontend Overview]
+
+
 ## Database Schema Design
 
 url to db diagram: https://dbdiagram.io/d/625634dd2514c979031dd911
