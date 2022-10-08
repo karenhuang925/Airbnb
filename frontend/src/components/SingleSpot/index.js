@@ -64,10 +64,11 @@ const SingleSpot = () => {
                 );
             }
         }
-        console.log(ParseInt(spot?.numReviews))
-        if (ParseInt(spot?.numReviews) === 0){
+        console.log(typeof(spot?.numReviews))
+        console.log(typeof(parseInt(0)))
+        if ((spot?.numReviews) === parseInt(0)){
             showReview = (
-                <p>This spot don't have review yet</p>
+                <p>This spot doesn't have review yet</p>
             )
         } else {
             if (!spotId) {
