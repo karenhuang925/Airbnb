@@ -1,37 +1,47 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as reviewActions from '../../store/review';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect,useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 
 const ReviewFormPage = ({review, formType}) => {
-    const history = useHistory()
     const dispatch = useDispatch();
     const [content, setContent] = useState(review.content)
     const [stars, setStars] = useState(review.stars)
     const [errors, setErrors] = useState([]);
+    const [redirect, setRedirect] = useState(false)
+
+    if(redirect) return (
+        <Redirect to="/users/my/reviews" />
+    )
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setErrors([]);
         review = { ...review, content, stars };
-
         if (formType === "Create review"){
-            return dispatch(reviewActions.addReviewFetch(review)).catch(
-                async (error) => {
-                    if (error) setErrors([error.message]);
+            dispatch(reviewActions.addReviewFetch(review)).catch(
+                async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors);
                 }
             );
+            if(errors.length === 0){
+                setRedirect(true)
+            }
         } else if(formType === "Edit review"){
-            return dispatch(reviewActions.editReviewFetch(review)).catch(
-                async (error) => {
-                    if (error) setErrors([error.message]);
+            dispatch(reviewActions.editReviewFetch(review)).catch(
+                async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors);
                 }
             );
-        }
-        history.push(`/users/my/reviews`);
+            if(errors.length === 0){
+                console.log('here')
 
+                setRedirect(true)
+            }
+        }
     };
 
     return(

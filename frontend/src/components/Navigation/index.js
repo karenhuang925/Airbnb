@@ -4,6 +4,7 @@ import React from 'react';
 import './Navigation.css';
 import { NavLink } from 'react-router-dom'
 import LoginFormModal from '../LoginFormModal';
+import DemoUserLogin from './DemoUserLogin'
 
 
 const Navigation = (isLoaded) => {
@@ -18,7 +19,12 @@ const Navigation = (isLoaded) => {
         sessionLinks = (
             <>
                 <LoginFormModal />
-                <NavLink to="/users/signup">Sign Up</NavLink>
+                <NavLink to="/users/signup">
+                    <button>
+                    Sign Up
+                    </button>
+                </NavLink>
+                <DemoUserLogin />
             </>
         );
     }

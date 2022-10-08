@@ -1,4 +1,4 @@
-import { useParams, Route, Switch, Link } from 'react-router-dom';
+import { useParams, Route, Switch, Link, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import * as reviewActions from '../../store/review';
@@ -10,7 +10,6 @@ const ReviewBySpot = ({spotId}) => {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
-
 
     useEffect(() => {
         dispatch(reviewActions.reviewBySpotFetch(spotId))
@@ -35,9 +34,6 @@ const ReviewBySpot = ({spotId}) => {
             })}
         </div>
     )
-
-
-
 }
 
 

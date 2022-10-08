@@ -79,7 +79,7 @@ const reviewReducer = (state = initialState, action) => {
             newState = action.payload;
             return newState;
         case ADD_REVIEW:
-            index = state.Reviews.findIndex(review => review.id === action.payload.id);
+            index = state.Reviews.length
             newState = {...state};
             newState.Reviews[index] = action.payload
             return newState;

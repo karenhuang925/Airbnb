@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { useParams, Route, Switch, Link } from 'react-router-dom';
 import * as spotActions from '../../store/spot';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,6 +15,7 @@ const SingleSpot = () => {
     const history = useHistory();
     const [errors, setErrors] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [redirect, setRedirect] = useState(false)
 
     useEffect(() => {
         dispatch(spotActions.getTheSpotDetail(spotId))
@@ -29,12 +30,18 @@ const SingleSpot = () => {
     let editAndDelete;
     let showReview;
 
+    if(redirect){
+        return (
+            <Redirect to="/spots" />
+        )
+    }
+
     if(spot){
 
         const deleteSpot = (e) => {
             e.preventDefault();
             dispatch(spotActions.deleteSpotFetch(spot.id))
-            history.push(`/spots`);
+            setRedirect(true)
         };
 
 
@@ -51,7 +58,9 @@ const SingleSpot = () => {
         } else {
             if(sessionUser){
                 editAndDelete = (
-                    <ReviewFormModal />
+                    <>
+                        <ReviewFormModal />
+                    </>
                 );
             }
         }
@@ -61,6 +70,9 @@ const SingleSpot = () => {
                 <p>This spot don't have review yet</p>
             )
         } else {
+            if (!spotId) {
+                return (<Redirect to='/spots'/>)
+            }
             showReview = (
                 <>
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
@@ -72,16 +84,18 @@ const SingleSpot = () => {
                     <span className="fa fa-star"></span>
                     <p>{parseFloat(spot.avgStarRating).toFixed(2)} average based on {spot.numReviews} reviews.</p>
                     <hr style={{border: "3px", solid:"#f1f1f1"}}></hr>
+
+
                     <ReviewBySpot spotId={spot.id} />
+
                 </>
             )
         }
-
-        if (errors.length > 0){
-            return (
-                <div>This spot is not available, please check later</div>
-            )
-        }
+    }
+    if (errors.length > 0){
+        return (
+            <div>This spot is not available, please check later</div>
+        )
     }
     return isLoaded && (
             <>
@@ -90,7 +104,7 @@ const SingleSpot = () => {
                 <h2>{spot.state}, {spot.country}</h2>
                 <p>Description: {spot.description}</p>
                 <div className="row">
-                    {spot.Images.map((image, i)=>{
+                    {spot.Images?.map((image, i)=>{
                         return (
                             <div className="column" key={i}>
                                 <img src={image.url} alt={`image${i}`} />

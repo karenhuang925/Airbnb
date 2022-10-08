@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { addSpotFetch } from '../../store/spot'
 import { editSpotFetch } from '../../store/spot'
 import { useDispatch } from 'react-redux';
@@ -8,7 +8,7 @@ import './SpotForm.css'
 const SpotForm = ({ spot, formType }) => {
 
     const dispatch = useDispatch()
-    const history = useHistory();
+    const [redirect, setRedirect] = useState(false);
     const [address, setAddress] = useState(spot.address);
     const [city, setCity] = useState(spot.city);
     const [state, setState] = useState(spot.state);
@@ -21,28 +21,36 @@ const SpotForm = ({ spot, formType }) => {
     const [previewImage, setPreviewImage] = useState(spot.previewImage);
     const [errors, setErrors] = useState([]);
 
+    if(redirect){
+        return (
+            <Redirect to={`/spots`} />
+        )
+    }
 
     const handleSubmit = (e) => {
+
+
         e.preventDefault();
         setErrors([]);
         spot = { ...spot, address, city, state, country, name, lat, lng, description, price, previewImage };
         if (formType === "Create spot"){
-            return dispatch(addSpotFetch(spot)).catch(
-                async (error) => {
-                    if (error) setErrors(error.message);
-
+            dispatch(addSpotFetch(spot)).catch(
+                async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors);
                 }
             );
+            setRedirect(true)
         } else if(formType === "Edit spot"){
-            return dispatch(editSpotFetch(spot)).catch(
-                async (error) => {
-                    if (error) setErrors(error.message);
-                    console.log(errors)
-
+            dispatch(editSpotFetch(spot)).catch(
+                async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors);
                 }
             );
+            setRedirect(true)
         }
-        // history.push(`/spots/${spot.id}`);
+
     };
 
     return (
@@ -59,6 +67,7 @@ const SpotForm = ({ spot, formType }) => {
                     type="text"
                     value={address}
                     onChange={e => setAddress(e.target.value)}
+                    required
                     />
             </label>
             <label>
@@ -67,6 +76,7 @@ const SpotForm = ({ spot, formType }) => {
                     type="text"
                     value={city}
                     onChange={e => setCity(e.target.value)}
+                    required
                     />
             </label>
             <label>
@@ -75,6 +85,7 @@ const SpotForm = ({ spot, formType }) => {
                     type="text"
                     value={state}
                     onChange={e => setState(e.target.value)}
+                    required
                     />
             </label>
             <label>
@@ -83,6 +94,7 @@ const SpotForm = ({ spot, formType }) => {
                     type="text"
                     value={country}
                     onChange={e => setCountry(e.target.value)}
+                    required
                     />
             </label>
 
@@ -94,6 +106,7 @@ const SpotForm = ({ spot, formType }) => {
                     type="text"
                     value={name || ""}
                     onChange={e => setName(e.target.value)}
+                    required
                     />
             </label>
             <label>
@@ -102,6 +115,7 @@ const SpotForm = ({ spot, formType }) => {
                     type="number"
                     value={price}
                     onChange={e => setPrice(e.target.value)}
+                    required
                     />
             </label>
             <label>
@@ -110,6 +124,7 @@ const SpotForm = ({ spot, formType }) => {
                     type="text"
                     value={description}
                     onChange={e => setDescription(e.target.value)}
+                    required
                     />
             </label>
             <label>
@@ -134,6 +149,7 @@ const SpotForm = ({ spot, formType }) => {
                     type="url"
                     value={previewImage}
                     onChange={e => setPreviewImage(e.target.value)}
+                    required
                     />
             </label>
             <input type="submit" value={formType} />

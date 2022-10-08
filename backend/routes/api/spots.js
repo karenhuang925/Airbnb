@@ -48,9 +48,10 @@ const validateCreateOrEditSpot = [
         .notEmpty()
         .withMessage('Description is required'),
     check('price')
-        // .exists({ checkFalsy: true })
+        .exists({ checkFalsy: true })
         .notEmpty()
-        .withMessage('Price  is required'),
+        .isInt({min: 0})
+        .withMessage('Price is required'),
     check('previewImage')
         .exists({ checkFalsy: true })
         .isURL()

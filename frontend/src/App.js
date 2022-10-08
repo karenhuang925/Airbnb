@@ -15,7 +15,6 @@ import AllSpots from './components/AllSpots'
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [spot, setSpot] = useState({})
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -25,9 +24,6 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          {/* <Route path="/users/login">
-            <LoginFormPage />
-          </Route> */}
           <Route path="/users/signup" component={SignupFormPage}/>
           <Route exact path="/users/my/spots" component={UserSpot}isLoaded={isLoaded}/>
           <Route exact path="/users/my/reviews" component={UserReview} isLoaded={isLoaded}/>

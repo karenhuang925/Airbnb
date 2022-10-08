@@ -36,7 +36,7 @@ export const getAllSpots = () => async dispatch => {
 export const getTheSpotDetail = (spotId) => async dispatch => {
     const response = await fetch(`/api/spots/${spotId}`);
     const spot = await response.json()
-    if(response.status !== 200){
+    if(response.status === 404){
         throw Error("Spot couldn't be found")
     }
     dispatch(getSpotDetail(spot));
@@ -57,6 +57,9 @@ export const addSpotFetch = (spot) => async dispatch => {
         body: JSON.stringify(spot),
     })
     const data = await response.json()
+    if(response.status === 400){
+        throw Error("Cannot create this spot, check your input")
+    }
     dispatch(addSpot(data))
     return response;
 }
@@ -67,6 +70,9 @@ export const editSpotFetch = (spot) => async dispatch => {
         body: JSON.stringify(spot),
     })
     const data = await response.json()
+    if(response.status === 400){
+        throw Error("Edit cannot be done, check your input")
+    }
     dispatch(editSpot(data))
     return response;
 }

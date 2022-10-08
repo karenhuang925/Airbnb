@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 const UserReview = () => {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState([]);
-
+    let reviews = useSelector(state => state.review.Reviews);
 
     useEffect(() => {
         dispatch(reviewActions.reviewByUserFetch())
@@ -15,9 +15,8 @@ const UserReview = () => {
             async (error) => {
                 if (error) setErrors(error.message);
             })
-    }, [dispatch]);
+    }, []);
 
-    let reviews = useSelector(state => state.review.Reviews);
 
     if (reviews?.length === 0) {
         return (<div>You don't have any review yet</div>)
