@@ -15,7 +15,7 @@ const validateEditRview = [
     check('content')
       .exists({ checkFalsy: true })
       .notEmpty()
-      .withMessage('Review text address is required'),
+      .withMessage('Review text is required'),
     check('stars')
       .exists({ checkFalsy: true })
       .isInt({ min: 1, max: 5 })

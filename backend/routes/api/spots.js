@@ -41,6 +41,7 @@ const validateCreateOrEditSpot = [
     check('name')
         .exists({ checkFalsy: true })
         .isLength({ max: 50 })
+        .withMessage('Name must be less than 50 characters')
         .notEmpty()
         .withMessage('Name must be less than 50 characters'),
     check('description')
@@ -49,11 +50,12 @@ const validateCreateOrEditSpot = [
         .withMessage('Description is required'),
     check('price')
         .exists({ checkFalsy: true })
-        .notEmpty()
+        .withMessage('Price is required')
         .isInt({min: 0})
         .withMessage('Price is required'),
     check('previewImage')
         .exists({ checkFalsy: true })
+        .withMessage('Preview image is required')
         .isURL()
         .withMessage('Preview image is required'),
     handleValidationErrors

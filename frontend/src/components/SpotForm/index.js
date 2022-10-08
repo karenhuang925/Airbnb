@@ -61,8 +61,8 @@ const SpotForm = ({ spot, formType }) => {
             <h2>{formType}</h2>
             <h3>Let's get started</h3>
             <p>Where's your place located? <br/>Enter your address</p>
-            <ul className='error'>
-                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+            <ul >
+                {errors.map((error, idx) => <li className='error' key={idx}>{error}</li>)}
             </ul>
             <label>
                 Address
