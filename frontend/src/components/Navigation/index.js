@@ -29,17 +29,27 @@ const Navigation = (isLoaded) => {
         );
     }
     return (
-            <ul>
-                <li>
+            <ul className='grid-container'>
+                <li className='item1'>
                     <NavLink exact to="/">
                         <i className="fas fa-bars"></i>
+                        Home Page
                     </NavLink>
+                </li>
+                <li className='item2'>
+                    <i className="fa-solid fa-user" />
                     {isLoaded && sessionLinks}
                 </li>
-                <li>
+                <li className='item3'>
                     <NavLink exact to="/spots">
-                        <i className="fas fa-loction-dot"></i>
+                        <i className="fas fa-house"></i>
                         Listing
+                    </NavLink>
+                </li>
+                <li className='item4'>
+                    <NavLink exact to="/about">
+                        <i className="fas fa-loction-dot"></i>
+                        About
                     </NavLink>
                 </li>
             </ul>

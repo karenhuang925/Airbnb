@@ -85,15 +85,12 @@ const reviewReducer = (state = initialState, action) => {
             return newState;
         case EDIT_REVIEW:
             index = state.Reviews.findIndex(review => review.id === action.payload.id);
-            newState = {
-                ...state
+            newState = {...state};
                 // review: {
                 //     ...state.review,
                 //     // review.Reviews[index] = {}
                 // }
-            };
             newState.Reviews[index] = action.payload
-
             return newState;
         case DELETE_REVIEW:
             index = state.Reviews.findIndex(review => review.id === action.payload);

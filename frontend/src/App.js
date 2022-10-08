@@ -9,6 +9,7 @@ import CreateSpotForm from "./components/CreateSpotForm";
 import EditSpotForm from "./components/EditSpotForm";
 import UserReview from "./components/UsersSpotReview/UserReviews";
 import UserSpot from "./components/UsersSpotReview/UserSpot";
+import AboutPage from "./components/AboutPage";
 import * as sessionActions from "./store/session";
 import AllSpots from './components/AllSpots'
 
@@ -32,6 +33,7 @@ function App() {
           <Route exact path="/spots/:spotId" component={SingleSpot} />
           <Route exact path="/spots/:spotId/edit" component={EditSpotForm}/>
           <Route exact path="/" component={AllSpots} isLoaded={isLoaded} />
+          <Route exact path="/about" component={AboutPage} />
           <Route>
             <h1>Page not found</h1>
           </Route>

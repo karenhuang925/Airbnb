@@ -14,7 +14,7 @@ const AllSpots = (isLoaded) => {
     if (sessionUser) {
         addSpotButton = (
             <Link to="/spots/new">
-                <button>Add a spot</button>
+                <button className='addSpotButton'>Add a spot</button>
             </Link>
         );
     } else {
@@ -44,7 +44,7 @@ const AllSpots = (isLoaded) => {
                 {spots?.map((spot)=>{
                     return (
                         <div className='singleSpot' key={spot.id}>
-                            <h1>{spot.name}</h1>
+                            <h2>{spot.name}</h2>
                             <img src={spot.previewImage} alt='loading'className='previewImg'/>
                             <p>{spot.city}, {spot.country}</p>
                             <p>${spot.price} per night</p>

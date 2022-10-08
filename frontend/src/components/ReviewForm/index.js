@@ -21,8 +21,12 @@ const ReviewFormPage = ({review, formType}) => {
         review = { ...review, content, stars };
         if (formType === "Create review"){
             dispatch(reviewActions.addReviewFetch(review))
-            .then(()=>setRedirect(true))
-            .catch(
+            .then(()=>{
+                dispatch(reviewActions.reviewByUserFetch())
+                setRedirect(true)
+            }
+
+            ).catch(
                 async (res) => {
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors);
@@ -47,8 +51,8 @@ const ReviewFormPage = ({review, formType}) => {
     return(
         <div>
             <form onSubmit={handleSubmit}>
-                <ul>
-                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                <ul >
+                    {errors.map((error, idx) => <li className='error' key={idx}>{error}</li>)}
                 </ul>
                 <label>
                 content

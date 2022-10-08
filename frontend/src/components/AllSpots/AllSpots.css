@@ -1,12 +1,12 @@
 .singleSpot {
     display: grid;
-    /* flex-direction: row; */
+    flex-direction: row;
     justify-content: center;
-    /* align-items: right; */
-    border: 1px solid black;
+    align-items: right;
+    width: 33.3%;
+    border: 0.5px solid #E94FD9;
     padding: 10px
 }
-
 
 .previewImg {
     border: 1px inset rgb(161, 158, 158);
@@ -16,9 +16,17 @@
 }
 
 .spotList {
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    flex-direction: column;
+    flex-flow: row wrap;
     padding: 10px;
+}
+
+.addSpotButton {
+
+    background: linear-gradient(254.15deg, #E94FD9 -20.51%, #E28B4F 53.77%, #914FE9 111.54%);
+    border-radius: 5px;
+    color: #FFFFFF;
+
 }

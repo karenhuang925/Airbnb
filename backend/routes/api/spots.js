@@ -257,7 +257,6 @@ router.post(
     restoreUser,
     validateCreateOrEditSpot,
     async (req, res) => {
-        // console.log(req)
         const {user} = req
         const spotInfo = req.body
         const spot = await Spot.create({

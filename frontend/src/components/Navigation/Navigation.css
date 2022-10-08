@@ -15,3 +15,24 @@ li {
     display: flex;
     flex-direction: row;
 }
+
+.grid-container {
+    display: inline-grid;
+    grid-template-areas:
+    'home user listing about';
+    gap: 10px;
+    padding: 10px;
+    width: 100%;
+}
+
+.grid-container > ul {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+}
+
+.item1 { grid-area: home; }
+.item2 { grid-area: user; }
+.item3 { grid-area: listing; }
+.item4 { grid-area: about; }

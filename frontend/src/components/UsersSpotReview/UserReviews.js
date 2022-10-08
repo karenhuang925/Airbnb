@@ -15,7 +15,7 @@ const UserReview = () => {
             async (error) => {
                 if (error) setErrors(error.message);
             })
-    }, []);
+    }, [dispatch]);
 
 
     if (reviews?.length === 0) {

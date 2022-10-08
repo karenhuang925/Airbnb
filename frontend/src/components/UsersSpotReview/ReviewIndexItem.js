@@ -22,13 +22,15 @@ const ReviewIndexItem = ({ review }) => {
 
 
     return (
-        <li>
-            <p>{review.User.firstName}, {review.User.lastName}:</p>
-            <p>{review.content}</p>
-            <p>stars: {review.stars}</p>
-            <EditReviewForm id={review.id}/>
-            <button onClick={deleteReview}>Delete</button>
-        </li>
+        <div>
+            <h1>My reviews</h1>
+            <li>
+                <p>{review.content}</p>
+                <p>stars: {review.stars}</p>
+                <EditReviewForm id={review.id}/>
+                <button onClick={deleteReview}>Delete</button>
+            </li>
+        </div>
     );
 };
 
