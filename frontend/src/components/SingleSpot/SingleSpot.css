@@ -105,7 +105,7 @@ color: orange;
 
 
 .reserve{
-    background: linear-gradient(254.15deg, rgba(233, 92, 79, 0.9) -20.51%, rgba(233, 79, 114, 0.9) 111.54%);
+    background-color: gray ;
     border-radius: 10px;
     position: relative;
     color: white;

@@ -109,7 +109,7 @@ const SingleSpot = () => {
                             <p className='price'>$ {spot.price} </p>
                             <p className='otherInfo'> per night <i className="fa fa-star checked"></i> {parseFloat(spot.avgStarRating).toFixed(2)} | {spot.numReviews} reviews</p>
                         </div>
-                        <button className='reserve'>Reserve</button>
+                        <button disabled='yes' className='reserve'>Reserve</button>
                     </div>
                 </div>
                 <div className="row">
