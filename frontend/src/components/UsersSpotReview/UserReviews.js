@@ -24,6 +24,7 @@ const UserReview = () => {
 
     return (
         <div className="row">
+            <h1>My reviews</h1>
             <ul>
                 {
                 reviews?.map(review => (
