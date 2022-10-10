@@ -1,38 +1,69 @@
-.active {
+li a.active {
     color: rgb(51, 51, 51);
     font-weight: bold;
     font-size: 1.2em;
-    background: rgb(240, 240, 179);
-    padding: 1px;
 }
 
-:hover{
-    color:black
+li a{
+    color:  rgb(0, 0, 0);
+    text-decoration: none;
 }
 
-li {
-    color:  rgb(77, 74, 74);
+.navItem > a:hover {
+    color:black;
+    text-decoration: none;
+    background-color: #eee7e7;
+}
+
+.navItem {
     display: flex;
     flex-direction: row;
 }
-
+.auth3{
+    background-color: white;
+    text-decoration: none;
+}
 .grid-container {
+    position: relative;
+    top:0px;
     display: inline-grid;
     grid-template-areas:
-    'home user listing about';
-    gap: 10px;
+    'home listing about user';
     padding: 10px;
     width: 100%;
+    list-style-type: none;
+    margin-top: 0px;
+    padding-top: 0px;
+    border-bottom: 1px solid #DBDBDB;
 }
 
 .grid-container > ul {
-    background-color: rgba(255, 255, 255, 0.8);
     text-align: center;
     padding: 20px 0;
     font-size: 30px;
 }
 
+.profile-dropdown{
+    position: absolute;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+    list-style-type: none;
+    background-color: #f3f1f1;
+}
+
+.profile-dropdown li{
+    text-decoration: none;
+}
+
+
 .item1 { grid-area: home; }
 .item2 { grid-area: user; }
 .item3 { grid-area: listing; }
 .item4 { grid-area: about; }
+
+
+.navButton{
+    border: 0px;
+    background-color: white;
+}

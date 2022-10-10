@@ -17,36 +17,35 @@ const Navigation = (isLoaded) => {
         );
         } else {
         sessionLinks = (
-            <>
-                <LoginFormModal />
+            <div>
+                <LoginFormModal className='auth3' />
                 <NavLink to="/users/signup">
-                    <button>
+                    <button className='auth3 navButton'>
                     Sign Up
                     </button>
                 </NavLink>
-                <DemoUserLogin />
-            </>
+                <DemoUserLogin className='auth3'/>
+            </div>
         );
     }
     return (
             <ul className='grid-container'>
-                <li className='item1'>
+                <li className='item1 navItem'>
                     <NavLink exact to="/">
                         <i className="fas fa-bars"></i>
                         Home Page
                     </NavLink>
                 </li>
-                <li className='item2'>
-                    <i className="fa-solid fa-user" />
+                <li className='item2 navItem'>
                     {isLoaded && sessionLinks}
                 </li>
-                <li className='item3'>
+                <li className='item3 navItem'>
                     <NavLink exact to="/spots">
                         <i className="fas fa-house"></i>
                         Listing
                     </NavLink>
                 </li>
-                <li className='item4'>
+                <li className='item4 navItem'>
                     <NavLink exact to="/about">
                         <i className="fas fa-loction-dot"></i>
                         About

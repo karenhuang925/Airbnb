@@ -74,7 +74,7 @@ const ReviewFormPage = ({review, formType}) => {
                     required
                     />
                 </label>
-                <button type="submit">Submit review</button>
+                <button className='modalButton' type="submit">Submit review</button>
             </form>
         </div>
     )

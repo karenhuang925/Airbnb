@@ -30,6 +30,7 @@ const LoginFormPage = () => {
     return(
         <div>
             <form onSubmit={handleSubmit}>
+                <p1>Log in</p1>
                 <ul>
                     {errors.map((error, idx) => <li className='error' key={idx}>{error}</li>)}
                 </ul>
@@ -53,7 +54,7 @@ const LoginFormPage = () => {
                     required
                     />
                 </label>
-                <button type="submit">Log In</button>
+                <button className='modalButton' type="submit">Log In</button>
             </form>
         </div>
     )

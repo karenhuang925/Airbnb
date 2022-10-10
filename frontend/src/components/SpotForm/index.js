@@ -57,14 +57,14 @@ const SpotForm = ({ spot, formType }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} >
+        <form className='pageForm' onSubmit={handleSubmit} >
             <h2>{formType}</h2>
             <h3>Let's get started</h3>
-            <p>Where's your place located? <br/>Enter your address</p>
+            <p>Where's your place located? Enter your address</p>
             <ul >
                 {errors.map((error, idx) => <li className='error' key={idx}>{error}</li>)}
             </ul>
-            <label>
+            <label className='pageInput'>
                 Address
                 <input
                     type="text"
@@ -76,6 +76,7 @@ const SpotForm = ({ spot, formType }) => {
             <label>
                 City
                 <input
+                    className='pageInput'
                     type="text"
                     value={city}
                     onChange={e => setCity(e.target.value)}
@@ -85,6 +86,7 @@ const SpotForm = ({ spot, formType }) => {
             <label>
                 State
                 <input
+                    className='pageInput'
                     type="text"
                     value={state}
                     onChange={e => setState(e.target.value)}
@@ -94,6 +96,7 @@ const SpotForm = ({ spot, formType }) => {
             <label>
                 Country
                 <input
+                    className='pageInput'
                     type="text"
                     value={country}
                     onChange={e => setCountry(e.target.value)}
@@ -106,6 +109,7 @@ const SpotForm = ({ spot, formType }) => {
             <label>
                 Name
                 <input
+                    className='pageInput'
                     type="text"
                     value={name || ""}
                     onChange={e => setName(e.target.value)}
@@ -115,6 +119,7 @@ const SpotForm = ({ spot, formType }) => {
             <label>
                 Price
                 <input
+                    className='pageInput'
                     type="number"
                     value={price}
                     onChange={e => setPrice(e.target.value)}
@@ -124,6 +129,7 @@ const SpotForm = ({ spot, formType }) => {
             <label>
                 Description
                 <input
+                    className='pageInput'
                     type="text"
                     value={description}
                     onChange={e => setDescription(e.target.value)}
@@ -133,6 +139,7 @@ const SpotForm = ({ spot, formType }) => {
             <label>
                 lat
                 <input
+                    className='pageInput'
                     type="number"
                     value={lat}
                     onChange={e => setLat(e.target.value)}
@@ -141,6 +148,7 @@ const SpotForm = ({ spot, formType }) => {
             <label>
                 lng
                 <input
+                    className='pageInput'
                     type="number"
                     value={lng}
                     onChange={e => setLng(e.target.value)}
@@ -149,13 +157,14 @@ const SpotForm = ({ spot, formType }) => {
             <label>
                 PreviewImage
                 <input
+                    className='pageInput'
                     type="url"
                     value={previewImage}
                     onChange={e => setPreviewImage(e.target.value)}
                     required
                     />
             </label>
-            <input type="submit" value={formType} />
+            <input className="pageButton" type="submit" value={formType} />
         </form>
     );
 }

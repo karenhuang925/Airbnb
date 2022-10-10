@@ -19,10 +19,10 @@ const AllSpots = (isLoaded) => {
         );
     } else {
         addSpotButton = (
-            <>
+            <div className='footer'>
                 <LoginFormModal />
                 <p>Want to earn extra money? log in to add a spot</p>
-            </>
+            </div>
         );
     }
 
@@ -39,7 +39,6 @@ const AllSpots = (isLoaded) => {
     const spots = useSelector(state => state.spot.Spots);
     return (
         <div>
-            {isLoaded && addSpotButton}
             <div className='spotList'>
                 {spots?.map((spot)=>{
                     return (
@@ -57,6 +56,7 @@ const AllSpots = (isLoaded) => {
                     )
                 })}
             </div>
+            {isLoaded && addSpotButton}
         </div>
 
 

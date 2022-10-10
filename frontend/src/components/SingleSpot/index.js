@@ -50,9 +50,12 @@ const SingleSpot = () => {
             editAndDelete = (
                 <div>
                     <Link to={`/spots/${spot?.id}/edit`}>
-                        <button>Edit this spot</button>
+                        <button className='actionButton'>
+                            <i className='fa-solid fa-edit'></i> Edit this spot</button>
                     </Link>
-                    <button onClick={deleteSpot}>Delete this spot</button>
+                    <button className='actionButton' onClick={deleteSpot}>
+                        <i className='fa-solid fa-trash'></i> Delete this spot
+                        </button>
                 </div>
             );
         } else {
@@ -75,16 +78,9 @@ const SingleSpot = () => {
             showReview = (
                 <>
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
-                    <span className="heading">User Rating</span>
-                    <span className="fa fa-star checked"></span>
-                    <span className="fa fa-star checked"></span>
-                    <span className="fa fa-star checked"></span>
-                    <span className="fa fa-star checked"></span>
-                    <span className="fa fa-star"></span>
-                    <p>{parseFloat(spot.avgStarRating).toFixed(2)} average based on {spot.numReviews} reviews.</p>
+                    <h2 className="heading">User Rating</h2>
+                    <p><i className="fa fa-star checked"></i> {parseFloat(spot.avgStarRating).toFixed(2)} average based on {spot.numReviews} reviews.</p>
                     <hr style={{border: "3px", solid:"#f1f1f1"}}></hr>
-
-
                     <ReviewBySpot spotId={spot.id} />
 
                 </>
@@ -100,8 +96,22 @@ const SingleSpot = () => {
             <>
                 {editAndDelete}
                 <h1>{spot.name}</h1>
-                <h2>{spot.state}, {spot.country}</h2>
-                <p>Description: {spot.description}</p>
+                <h3>
+                    <i className="fa fa-star checked"></i> {parseFloat(spot.avgStarRating).toFixed(2)} | {spot.numReviews} reviews     <i className='fa-solid fa-location-dot'></i> {spot.city}, {spot.state}
+                </h3>
+                <div className='desReserveRow'>
+                    <div className='des'>
+                        <h2>About this spot</h2>
+                        <p className='description'>Description: {spot.description}</p>
+                    </div>
+                    <div className='reserveBox'>
+                        <div className='reserveInfo'>
+                            <p className='price'>$ {spot.price} </p>
+                            <p className='otherInfo'> per night <i className="fa fa-star checked"></i> {parseFloat(spot.avgStarRating).toFixed(2)} | {spot.numReviews} reviews</p>
+                        </div>
+                        <button className='reserve'>Reserve</button>
+                    </div>
+                </div>
                 <div className="row">
                     {spot.Images?.map((image, i)=>{
                         return (

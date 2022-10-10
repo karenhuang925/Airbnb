@@ -21,7 +21,7 @@ const DemoUserLogin = () => {
     }
     return (
     <>
-        <button onClick={()=>demoLogin()}>Demo User</button>
+        <button className='navButton' onClick={()=>demoLogin()}>Demo User</button>
         <ul>
             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>

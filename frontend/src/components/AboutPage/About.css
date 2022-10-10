@@ -1,0 +1,22 @@
+.avatar{
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+
+}
+.aboutContainer{
+    display: flex;
+    margin: 40px;
+
+}
+
+.aboutInfo > a {
+    margin: 5px;
+    font-size: large;
+    color: black;
+
+}
+
+.aboutInfo > a:visited {
+    color: black;
+}

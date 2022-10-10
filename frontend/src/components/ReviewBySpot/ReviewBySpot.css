@@ -24,3 +24,11 @@ img{
     flex: 33.33%;
     padding: 5px;
 }
+
+.content{
+    overflow: scroll;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  /* truncate to 4 lines */
+    -webkit-line-clamp: 4;
+}

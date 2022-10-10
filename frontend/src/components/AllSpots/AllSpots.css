@@ -4,15 +4,17 @@
     justify-content: center;
     align-items: right;
     width: 33.3%;
-    border: 0.5px solid #E94FD9;
+    border: 0.5px solid #e94f8f;
     padding: 10px
 }
 
 .previewImg {
-    border: 1px inset rgb(161, 158, 158);
     background: rgb(161, 158, 158);
     margin: 30px;
-    width: 50%
+    width: 70%;
+    border-radius: 10%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+
 }
 
 .spotList {
@@ -24,9 +26,23 @@
 }
 
 .addSpotButton {
-
-    background: linear-gradient(254.15deg, #E94FD9 -20.51%, #E28B4F 53.77%, #914FE9 111.54%);
+    position: relative;
+    left: 30%;
+    text-align: center;
+    width: 40%;
+    margin-top: 50px;
+    background: linear-gradient(254.15deg, #e94fa1 -20.51%, #e2654f 53.77%, #e74fe9 111.54%);
     border-radius: 5px;
     color: #FFFFFF;
+}
 
+.addSpotButton:hover{
+    font-weight: bold;
+}
+
+
+div.footer{
+    position: relative;
+    bottom: 10px;
+    padding-top: 20px;
 }

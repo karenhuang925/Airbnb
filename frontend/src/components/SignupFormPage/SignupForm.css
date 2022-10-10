@@ -1,0 +1,23 @@
+.pageForm{
+    margin-left: 30px;
+}
+
+.pageInput{
+    width: 50%
+}
+
+.pageButton{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 35px;
+    gap: 20px;
+    position: relative;
+    left: 15%;
+
+    background: linear-gradient(254.15deg, rgba(233, 92, 79, 0.9) -20.51%, rgba(233, 79, 114, 0.9) 111.54%);
+    border-radius: 5px;
+    border: 0px;
+    color: white
+}

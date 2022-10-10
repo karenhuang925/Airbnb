@@ -1,0 +1,25 @@
+input{
+    background: #F7F7F7;
+/* grey 1 */
+    box-sizing: border-box;
+
+    border: 0.5px solid #DBDBDB;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.modalButton{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 35px;
+    gap: 20px;
+    position: relative;
+    width: 100%;
+    background: linear-gradient(254.15deg, rgba(233, 92, 79, 0.9) -20.51%, rgba(233, 79, 114, 0.9) 111.54%);
+    border-radius: 5px;
+    border: 0px;
+    color: white
+}

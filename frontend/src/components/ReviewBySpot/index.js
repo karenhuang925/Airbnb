@@ -26,9 +26,9 @@ const ReviewBySpot = ({spotId}) => {
                 return (
                     <div className="column" key={review.id}>
                         <p>{review.User.firstName}, {review.User.lastName}:</p>
-                        <p>{review.content}</p>
-                        <p>stars: {review.stars}</p>
-
+                        <p className='content'>{review.content}</p>
+                        <p>stars: {review.stars} <i className="fa fa-star checked"></i>
+                        </p>
                     </div>
                 )
             })}
