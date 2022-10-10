@@ -43,11 +43,11 @@ color: orange;
     background: linear-gradient(254.15deg, #e94fa1 -20.51%, #e2654f 53.77%, #e74fe9 111.54%);
     border-radius: 5px;
     color: #FFFFFF;
-    height: 25px;
+    height: 30px;
+    width: 130px;
     margin: 10px;
     right: 30%;
     text-align: center;
-    width: 20%;
     border-width: 0px;
 
 }

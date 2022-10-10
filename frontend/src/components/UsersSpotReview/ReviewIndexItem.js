@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import * as reviewActions from '../../store/review';
 import EditReviewForm from '../ReviewForm/EditReview'
+import './review.css'
 
 
 const ReviewIndexItem = ({ review }) => {
@@ -24,11 +25,11 @@ const ReviewIndexItem = ({ review }) => {
     return (
         <div>
             <h1>My reviews</h1>
-            <li>
+            <li className='singleReview'>
                 <p>{review.content}</p>
-                <p>stars: {review.stars}</p>
+                <p>stars: {review.stars} <i className="fa fa-star checked"></i></p>
                 <EditReviewForm id={review.id}/>
-                <button onClick={deleteReview}>Delete</button>
+                <button className='actionButton' onClick={deleteReview}>Delete</button>
             </li>
         </div>
     );

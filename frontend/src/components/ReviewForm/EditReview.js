@@ -13,7 +13,7 @@ const EditReviewForm = ({id}) => {
 
     return (
         <>
-            <button onClick={() => setShowModal(true)}>Edit</button>
+            <button className='actionButton' onClick={() => setShowModal(true)}>Edit</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <ReviewFormPage review={review} formType="Edit review" />
