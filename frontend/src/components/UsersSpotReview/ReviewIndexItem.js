@@ -24,7 +24,7 @@ const ReviewIndexItem = ({ review }) => {
 
     return (
         <div>
-            <h1>My reviews</h1>
+
             <li className='singleReview'>
                 <p>{review.content}</p>
                 <p>stars: {review.stars} <i className="fa fa-star checked"></i></p>
