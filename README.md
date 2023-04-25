@@ -16,13 +16,13 @@ React/Redux
 ## Quick Links
 [Getting Started](https://kairbnb.herokuapp.com)
 
-[Database Schema Design](https://github.com/karenhuang925/Airbnb/edit/main/README.md#database-schema-design)
+[Database Schema Design](https://github.com/karenhuang925/Airbnb/main/README.md#database-schema-design)
 
-[API Documentation](https://github.com/karenhuang925/Airbnb/edit/main/README.md#api-documentation)
+[API Documentation](https://github.com/karenhuang925/Airbnb/main/README.md#api-documentation)
 
-[Frontend Features](https://github.com/karenhuang925/Airbnb/edit/main/README.md#Frontend-Features)
+[Frontend Features](https://github.com/karenhuang925/Airbnb/main/README.md#Frontend-Features)
 
-[Frontend Overview](https://github.com/karenhuang925/Airbnb/edit/main/README.md#Frontend-Overview)
+[Frontend Overview](https://github.com/karenhuang925/Airbnb/main/README.md#Frontend-Overview)
 
 
 
