@@ -1,5 +1,17 @@
 # Airbnb
 
+## Quick Links
+[Live Site](https://kairbnb.herokuapp.com)
+
+[Frontend Features](https://github.com/karenhuang925/Airbnb/blob/main/README.md#Frontend-Features)
+
+[Frontend Overview](https://github.com/karenhuang925/Airbnb/blob/main/README.md#Frontend-Overview)
+
+[Database Schema Design](https://github.com/karenhuang925/Airbnb/blob/main/README.md#database-schema-design)
+
+[API Documentation](https://github.com/karenhuang925/Airbnb/blob/main/README.md#api-documentation)
+
+
 ## Frontend Features
 <img width="976" alt="Screen Shot 2022-10-08 at 3 20 54 PM" src="https://user-images.githubusercontent.com/92420431/194729770-2a5560d1-0a86-4ff2-bebf-27c7483d3005.png">
 
@@ -12,20 +24,6 @@
 Sequelize/Express
 
 React/Redux
-
-## Quick Links
-[Getting Started](https://kairbnb.herokuapp.com)
-
-[Database Schema Design](https://github.com/karenhuang925/Airbnb/main/README.md#database-schema-design)
-
-[API Documentation](https://github.com/karenhuang925/Airbnb/main/README.md#api-documentation)
-
-[Frontend Features](https://github.com/karenhuang925/Airbnb/main/README.md#Frontend-Features)
-
-[Frontend Overview](https://github.com/karenhuang925/Airbnb/main/README.md#Frontend-Overview)
-
-
-
 
 
 ## Database Schema Design
