@@ -1,5 +1,13 @@
 # Airbnb
 
+## Frontend Features
+<img width="976" alt="Screen Shot 2022-10-08 at 3 20 54 PM" src="https://user-images.githubusercontent.com/92420431/194729770-2a5560d1-0a86-4ff2-bebf-27c7483d3005.png">
+
+
+## Frontend Overview
+<img width="973" alt="Screen Shot 2022-10-08 at 3 18 17 PM" src="https://user-images.githubusercontent.com/92420431/194729719-1c3541e5-c9fa-4c32-b5e3-185134857149.png">
+
+
 ## Technologies
 Sequelize/Express
 
@@ -1383,11 +1391,3 @@ Return spots filtered by query parameters.
       }
     }
     ```
-
-
-## Frontend Features
-<img width="976" alt="Screen Shot 2022-10-08 at 3 20 54 PM" src="https://user-images.githubusercontent.com/92420431/194729770-2a5560d1-0a86-4ff2-bebf-27c7483d3005.png">
-
-
-## Frontend Overview
-<img width="973" alt="Screen Shot 2022-10-08 at 3 18 17 PM" src="https://user-images.githubusercontent.com/92420431/194729719-1c3541e5-c9fa-4c32-b5e3-185134857149.png">
